@@ -30,6 +30,7 @@ export class MapComponent implements AfterViewInit {
   selectedEstado;
   selectedMunicipio;
   selectedUnidad;
+  selectedLocalidad;
 
   arrEstados = [];
   arrMunicipios = [];
@@ -49,7 +50,7 @@ export class MapComponent implements AfterViewInit {
     this.getUnidades();
   }
 
-  private initMap(): void {
+  initMap(): void {
     this.map = L.map('map', {
       center: [ 39.8282, -98.5795 ],
       zoom: 3
@@ -63,7 +64,7 @@ export class MapComponent implements AfterViewInit {
     tiles.addTo(this.map);
   }
 
- private getEstados()
+ getEstados()
  {
   this.dataApiService.getEstados().subscribe((estados: any) => {
     this.arrEstados = estados.content;
@@ -71,7 +72,7 @@ export class MapComponent implements AfterViewInit {
  
  }
 
- private getUnidades()
+ getUnidades()
  {
   this.dataApiService.getUnidades().subscribe((unidades: any) => {
     this.arrActividades = unidades.content;
@@ -79,7 +80,7 @@ export class MapComponent implements AfterViewInit {
  
  }
  
- private changeEstado()
+ changeEstado()
  {
    this.dataApiService.getMunicipios(this.selectedEstado)
    .subscribe((municipios: any) => {
@@ -112,7 +113,7 @@ export class MapComponent implements AfterViewInit {
  }
  
 
- private buscarDenues()
+ buscarDenues()
  {
 
   this.markerService.makeDenuesMarkers(this.map,
